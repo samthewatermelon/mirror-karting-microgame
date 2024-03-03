@@ -1,0 +1,173 @@
+=========Version 4==========
+hello game devs
+
+welcome to another episode in the marcakes series
+where we try and add features to the karting microgame
+today we are going to take the lobby from the
+previous episode a step further and implement a track select screen
+and restrict it so only the server can make the selection
+
+if you have any suggestions, feel free to leave a comment down below
+if you need help with anything please join the discord
+details in the description
+
+now let's begin
+
+Request to: 
+--- not in this video --- Implement "Kart Selection"
+--- not in this video --- * Download car model online
+--- not in this video --- * Import it
+--- not in this video --- * Tweak it to make it look decent
+--- not in this video --- * Make it a Prefab
+--- not in this video --- * Open KartClassic Prefab
+--- not in this video --- * Disable Kart and Player models
+--- not in this video --- * Import new car model and align it to Kart
+--- not in this video --- * Test that it works ok after changes
+
+Implement "Track Selection"
+
+* Duplicate Scene (track)
+* Rename Track1 and Track2
+* Give Track2 some characteristics
+* Add it to Build Settings
+
+* Open Track1 and Track2
+* Disable Grid
+* Take two square screenshots
+* Save them to assets folder
+* Change them both to 2D sprites
+
+* Create new scene "TrackSelect"
+* Create camera
+* Create UI > Canvas GameObject (rename to UI)
+	* Canvas Component
+		* Render Mode = Screen Space - Camera
+		* Render Camera = Camera
+	* Canvas Scaler
+		* UI Scale With Screen Size
+		* Screen Match Mode = Match Width or Height
+		* Match = 0.5
+
+Under UI GameObject
+* Create UI > Text (rename trackSelectText)
+	* "Choose your track"
+* Create UI > Button (rename Track1)
+	* Create "loadTrack" script (below)
+		* Track Scene = Track1 
+	* Button
+		* On Click "loadTrack.loadTrackScene"
+	* Image
+		* Source Image = Track1.png
+* Create UI > Button (rename Track2)
+	* Create "loadTrack" script (below)
+		* Track Scene = Track2
+	* Button
+		* On Click "loadTrack.loadTrackScene"
+	* Image
+		* Source Image = Track2.png
+* Add it to Build Settings
+
+* Open IntroMenu Scene
+* NetworkRoomManager
+	* NetworkRoomManager
+		* OnlineScene = IntroMenu
+		* GameplayScene = TrackSelect
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Mirror;
+
+public class loadTrack : NetworkBehaviour
+{
+    [Scene]
+    public string trackScene;
+
+    public void loadTrackScene()
+    {
+        if (isServer)
+        {
+            Debug.Log("you loaded track " + trackScene);
+            NetworkManager.singleton.ServerChangeScene(trackScene);
+        }
+        //Cmdloady();
+    }
+
+    // [Command(requiresAuthority = false)]
+    // public void Cmdloady()
+    // {
+    //     NetworkManager.singleton.ServerChangeScene(trackScene);
+    // }
+
+}
+=========Version 3==========
+Implemented lobby system
+Fixed some broken 
+
+1. Look at example Mirror\Examples\Room
+2. Check out README
+3. Open all scenes and add them to build window in this order:
+-	OfflineScene
+-	RoomScene
+-	OnlineScene
+4. Show the NetworkRoomManagerEx (instead of NetworkManager)
+5. Show the RoomPlayer prefab
+	"NetworkRoomPlayerExt Score"
+6. Show the GamePlayer
+	"Player Score"
+4. Build and run and demonstrate lobby
+5. We won't do it exactly the same as this but this is really important to learn how it should be set up
+
+1. Open Karting\Scenes\IntroMenu
+2. Add to Build (first position) (remove everything else)
+3. Create KartRoomPlayer	
+	Add Component Network Identity
+	Add Component Network Room Player
+	Make it a prefab \Prefabs\KartRoomPlayer
+	Delete from scene
+4. New GameObject NetworkRoomManager
+	Add Component NetworkRoomManager
+		OfflineScene:                 \Karting\Scenes\IntroMenu
+		OnlineScene:                  \Karting\Scenes\IntroMenu
+		Transport:                    KCP Transport
+		Player Prefab:                \Prefabs\KartClassic Variant
+		Player Spawn Method:          Round Robin
+		Room Player Prefab:           \Prefabs\KartRoomPlayer
+		Room Scene:                   \Karting\Scenes\IntroMenu
+		Gameplay Scene:               \Karting\Scenes\MainScene
+		Registered Spawnable Prefabs: \Prefabs\projectile variant
+	Add Component Network Manager HUD
+	Add Component Kcp Transport	
+6. Open \Karting\Scenes\MainScene
+7. Add to Build (second position)
+8. Delete NetworkManager GameObject
+9. Create GameObject StartPos
+	Add Component NetworkStartPosition
+	Set position
+	Duplicate x3
+10. Open \Prefabs\KartClassic Variant
+	Add Component Network Rigidbody
+		Client Authority: True
+		Sync Velocity:    True
+		Sync Direction:   Client to Server
+	Change Network Transform
+		Sync Rotation:    True
+		Sync Direction:   Client to Server
+	
+before we get into the tutorial
+quick shout out to marcakes who joined the discord to ask about how to implement some extra features
+such as having a menu and getting all the players to start at the same time
+he did make some other requests, but for the purposes of this video we'll keep it really simple
+and just implement the network lobby as easily as possible which will also act as the main menu
+
+if you have questions about any of my videos or have requests, feel free to reach out in the comments or join the discord
+please don't forget to drop a like if you find my video useful in way at all	
+
+=========Version 2==========
+Implemented new input system
+============================
+Implemented witches hats
+============================
+Implemented Mirror Multiplayer
+============================
+
