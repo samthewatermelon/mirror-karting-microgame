@@ -4,6 +4,7 @@ using Mirror;
 using System.Collections.Generic;
 using Leguar.TotalJSON;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace DapperDino.Scoreboards
 {
@@ -28,8 +29,8 @@ namespace DapperDino.Scoreboards
 
         private void Start()
         {
-            singleton = this;
             DontDestroyOnLoad(gameObject);
+            singleton = this;                        
             ScoreboardSaveData savedScores = GetSavedScores();            
             UpdateUI(savedScores);
             CmdSaveScores(JsonUtility.ToJson(savedScores, true));
@@ -77,6 +78,9 @@ namespace DapperDino.Scoreboards
 
         private void Update()
         {
+            if (SceneManager.GetActiveScene().name == "KartSelect" || SceneManager.GetActiveScene().name == "TrackSelect")
+                return;
+
             if (Input.GetKeyDown(KeyCode.Tab))                         // added this to toggle scoreboard with tab
                 highscoresHolderTransform.gameObject.SetActive(true);  // added this to toggle scoreboard with tab
                                                                        // added this to toggle scoreboard with tab

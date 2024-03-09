@@ -10,6 +10,15 @@ namespace KartGame.KartSystems
         public bool brakeState;      //// CREATE VARIABLES
         public float turnValue;      //// CREATE VARIABLES
 
+        private void Start()
+        {
+            if (isOwned)
+            {
+                GetComponent<PlayerInput>().enabled = true;
+                GetComponent<PlayerInputManager>().enabled = true;
+            }
+        }
+
         public void AccelerateInput(InputAction.CallbackContext context) //// CREATE UNITY EVENTS
         {
             if (isOwned)
@@ -30,7 +39,6 @@ namespace KartGame.KartSystems
             if (isOwned)
             {
                 turnValue = context.action.ReadValue<Vector2>().x;       //// CREATE UNITY EVENTS
-                //Debug.Log(context.action.ReadValue<Vector2>().x);
             }
         }
 

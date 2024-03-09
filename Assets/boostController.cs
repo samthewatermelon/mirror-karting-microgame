@@ -17,16 +17,19 @@ public class boostController : NetworkBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name != "KartSelect" && SceneManager.GetActiveScene().name != "TrackSelect")
-        {
-            boostSlider = NetworkRoomManager.singleton.transform.Find("UI").Find("BoostBar").GetComponent<Slider>();
-            boostSlider.transform.Find("Fill").GetComponent<Image>().enabled = true;
-            boostSlider.value = startingBoostValue;
-        }
+        if (SceneManager.GetActiveScene().name == "KartSelect" || SceneManager.GetActiveScene().name == "TrackSelect")
+            return;
+
+        boostSlider = NetworkRoomManager.singleton.transform.Find("UI").Find("BoostBar").GetComponent<Slider>();
+        boostSlider.transform.Find("Fill").GetComponent<Image>().enabled = true;
+        boostSlider.value = startingBoostValue;
     }
 
     void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name == "KartSelect" || SceneManager.GetActiveScene().name == "TrackSelect")
+            return;
+
         if (Input.GetKey(KeyCode.Space) && boostSlider.value > 1f) 
             setSpeed(defaultTopSpeed * 1.7f, defaultAcceleration * 2f);
         else

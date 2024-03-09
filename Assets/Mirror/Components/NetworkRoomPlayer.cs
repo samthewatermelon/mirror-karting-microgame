@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Mirror
 {
@@ -17,10 +19,23 @@ namespace Mirror
         public Texture avatarImage;
         public Texture avatarReadyImage;
 
-        public int testHeight;
-        public int testWidth;
-        public int testX;
-        public int testY;
+        [SyncVar(hook = nameof(HandleSteamIdUpdated))]
+        private ulong steamId;
+        public void SetSteamId(ulong steamId)
+        {
+            this.steamId = steamId;
+        }
+
+        private void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
+        {            
+        }
+
+        [SerializeField] private RawImage profileImage = null;
+
+        // public int testHeight;
+        // public int testWidth;
+        // public int testX;
+        // public int testY;
 
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
@@ -139,7 +154,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnClientEnterRoom() 
         {
-            Debug.Log("player entered! :D");
+            Debug.Log("player entered room!");
         }
 
         /// <summary>
@@ -149,7 +164,7 @@ namespace Mirror
 
         public virtual void OnClientExitRoom() 
         {
-            Debug.Log("player left! :(");
+            //Debug.Log("player left! :(");
         }
 
         #endregion

@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class clientRaceCode : NetworkBehaviour
 {
@@ -21,6 +22,9 @@ public class clientRaceCode : NetworkBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "KartSelect" || SceneManager.GetActiveScene().name == "TrackSelect")
+            return;
+
         rm = raceManager.singleton;
         rm.CmdUpdatePlayerCount();
         totalLaps = rm.totalLaps;

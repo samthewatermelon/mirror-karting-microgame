@@ -20,14 +20,15 @@ public class kartSelect : NetworkBehaviour
     [Command(requiresAuthority = false)]
     private void CmdSpawn(string carName)
     {
-        GameObject carPrefab = ((NetworkRoomManager)NetworkManager.singleton).spawnPrefabs.Find(car => car.name == carName);
+        GameObject carPrefab = NetworkManager.singleton.spawnPrefabs.Find(car => car.name == carName);
         if (carPrefab == null)
             return;
 
         NetworkServer.Destroy(selectedCar);
         GameObject carObj = Instantiate(carPrefab, transform.position, Quaternion.identity);
         selectedCar = carObj;
-        NetworkServer.Spawn(carObj, connectionToClient);
+        //NetworkServer.Spawn(carObj, connectionToClient);
+        NetworkServer.Spawn(carObj, gameObject);
     }
 
     public override void OnStartLocalPlayer() // spawn car when player joins

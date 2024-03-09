@@ -69,10 +69,7 @@ MonoBehaviour:
   localPlayerName: 
   avatarImage: {fileID: 2800000, guid: adb359bdbaf4d944aa6955ff328d073d, type: 3}
   avatarReadyImage: {fileID: 2800000, guid: 065bb6ab423406f4d9a135b9c3e73c61, type: 3}
-  testHeight: 0
-  testWidth: 0
-  testX: 0
-  testY: 0
+  profileImage: {fileID: 0}
   showRoomGUI: 1
   readyToBegin: 0
   index: 0
