@@ -44,7 +44,7 @@ public class SteamRoomPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(IndexChanged))]
     public int index;
 
-        public void SetSteamId(ulong steamId)
+    public void SetSteamId(ulong steamId)
     {
         this.steamId = steamId;
     }
@@ -111,6 +111,7 @@ public class SteamRoomPlayer : NetworkBehaviour
         if (isLocalPlayer)
         {
             //localPlayerName = PlayerPrefs.GetString("savedName");
+            playerPreferences.singleton.playerName = localPlayerName;
             CmdSetPlayerName(localPlayerName);
         }
 

@@ -11,17 +11,19 @@ public class clientRaceCode : NetworkBehaviour
     private int totalLaps;
     public int currentLap = 0;
     public Transform lastCheckpoint;
-
     public AudioSource LapCountSound;
-
     public AudioSource youWin;
+    public DapperDino.Scoreboards.Scoreboard sb;
+    public TextMeshPro numberPlateName;
+    [SyncVar(hook = nameof(setPlateName))]
+    public string plateName;
 
     private raceManager rm;
 
-    public DapperDino.Scoreboards.Scoreboard sb;
-
     private void Start()
     {
+        CmdSetNumberPlateName(playerPreferences.singleton.playerName);
+
         if (SceneManager.GetActiveScene().name == "KartSelect" || SceneManager.GetActiveScene().name == "TrackSelect")
             return;
 
@@ -30,6 +32,16 @@ public class clientRaceCode : NetworkBehaviour
         totalLaps = rm.totalLaps;
         sb = DapperDino.Scoreboards.Scoreboard.singleton;
         sb.highscoresHolderTransform.gameObject.SetActive(false);
+    }
+    void setPlateName(string oldName, string newName)
+    {
+        numberPlateName.text = newName;
+    }
+
+    [Command]
+    public void CmdSetNumberPlateName(string name)
+    {
+        plateName = name;
     }
 
     private void OnTriggerEnter(Collider other)
