@@ -66,7 +66,7 @@ public class SteamRoomPlayer : NetworkBehaviour
     private void onAvatarImageLoaded(AvatarImageLoaded_t callback)
     {
         if (callback.m_steamID.m_SteamID != steamId) { return; }
-        profileImage.texture = GetSteamImageAsTexture(callback.m_iImage);
+        profileImage.texture = GetSteamImageAsTexture(callback.m_iImage);        
     }
 
     private void HandleSteamIdUpdated(ulong oldSteamId, ulong newSteamId)
@@ -80,6 +80,8 @@ public class SteamRoomPlayer : NetworkBehaviour
         if (imageId == -1) { return; }
         
         profileImage.texture = GetSteamImageAsTexture(imageId);
+
+        CmdSetPlayerName(localPlayerName);
     }
 
     private Texture2D GetSteamImageAsTexture(int iImage)
@@ -114,7 +116,7 @@ public class SteamRoomPlayer : NetworkBehaviour
         {
             //localPlayerName = PlayerPrefs.GetString("savedName");
             playerPreferences.singleton.playerName = localPlayerName;
-            CmdSetPlayerName(localPlayerName);
+            //CmdSetPlayerName(localPlayerName);
         }
 
         if (NetworkManager.singleton is SteamRoomManager room)
