@@ -13,6 +13,8 @@ public class SteamRoomPlayer : NetworkBehaviour
     public string localPlayerName;
     public Texture avatarImage;
     public Texture avatarReadyImage;
+    public Texture ReadyTextImage;
+    public Texture CancelTextImage;
 
     public int tempX, tempY, tempWidth, tempHeight;
 
@@ -227,20 +229,27 @@ public class SteamRoomPlayer : NetworkBehaviour
 
     void DrawPlayerReadyState()
     {
-        GUILayout.BeginArea(new Rect(60f + (index * 130), 80, 120, 160));
+        var space = Screen.width / 16;
+        var width = Screen.width / 6;
+
+        /// draw initial square for player
+        GUILayout.BeginArea(new Rect(space + (space * index) + (width * index), 80, width, width));
 
         var style = new GUIStyle();
         style.fontSize = 30;
         style.fontStyle = FontStyle.Bold;
         style.normal.textColor = Color.white;
+        style.wordWrap = true;
+        style.alignment = TextAnchor.MiddleCenter;
 
-        //GUILayout.Label($"Player [{index + 1}]");
+        /// draw player texture
+        GUI.DrawTexture(new Rect(0, width, width, -width), profileImage.texture);
+
         GUILayout.Label($"{netPlayerName}", style);
 
-        GUI.DrawTexture(new Rect(0, 160, 120, -120), profileImage.texture);
-
+        /// draw player ready texture
         if (readyToBegin)
-            GUI.DrawTexture(new Rect(0, 40, 120, 120), avatarReadyImage);
+            GUI.DrawTexture(new Rect(0, 0, width, width), avatarReadyImage);
 
         if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("KICK"))
         {
@@ -257,16 +266,20 @@ public class SteamRoomPlayer : NetworkBehaviour
     {
         if (NetworkClient.active && isLocalPlayer)
         {
-            GUILayout.BeginArea(new Rect(85, 260, 70, 20));
-            //GUI.DrawTexture(new Rect(0, 20, 120, 120), avatarImage);
+            var width = Screen.width / 6;
+            var style = new GUIStyle();
+            style.alignment = TextAnchor.MiddleCenter;
+
+            /// draw ready button
+            GUILayout.BeginArea(new Rect(Screen.width / 2 - width / 2, Screen.height / 2, width, width / 3));
             if (readyToBegin)
             {
-                if (GUILayout.Button("Cancel"))
+                if (GUILayout.Button(CancelTextImage, style, GUILayout.Width(width), GUILayout.Height(width / 3)))
                     CmdChangeReadyState(false);
             }
             else
             {
-                if (GUILayout.Button("Ready?"))
+                if (GUILayout.Button(ReadyTextImage, style, GUILayout.Width(width), GUILayout.Height(width/ 3)))
                     CmdChangeReadyState(true);
             }
 

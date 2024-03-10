@@ -8,7 +8,14 @@ using Steamworks;
 
 public class SteamRoomManager : NetworkManager
 {
-
+    /// <summary>
+    /// This is a specialized NetworkManager that includes a networked room.
+    /// </summary>
+    /// <remarks>
+    /// <para>The room has slots that track the joined players, and a maximum player count that is enforced. It requires that the NetworkRoomPlayer component be on the room player objects.</para>
+    /// <para>NetworkRoomManager is derived from NetworkManager, and so it implements many of the virtual functions provided by the NetworkManager class. To avoid accidentally replacing functionality of the NetworkRoomManager, there are new virtual functions on the NetworkRoomManager that begin with "OnRoom". These should be used on classes derived from NetworkRoomManager instead of the virtual functions on NetworkManager.</para>
+    /// <para>The OnRoom*() functions have empty implementations on the NetworkRoomManager base class, so the base class functions do not have to be called.</para>
+    /// </remarks>
     public struct PendingPlayer
     {
         public NetworkConnectionToClient conn;
@@ -696,10 +703,9 @@ public class SteamRoomManager : NetworkManager
         style.fontSize = 30;
         style.fontStyle = FontStyle.Bold;
         style.normal.textColor = Color.white;
+        style.alignment = TextAnchor.MiddleCenter;
 
         if (IsSceneActive(RoomScene))
-            //GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
-            //GUI.Box(new Rect(40f, 40f, Screen.width - 80f, Screen.height - 80f), "ROOM PLAYERS");
             GUI.TextArea(new Rect(Screen.width / 2 - 60, 40, 120, 30), "PLAYERS", style);
     }
     #endregion

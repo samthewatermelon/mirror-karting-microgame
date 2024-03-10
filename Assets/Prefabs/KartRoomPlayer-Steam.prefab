@@ -76,6 +76,8 @@ MonoBehaviour:
   localPlayerName: 
   avatarImage: {fileID: 2800000, guid: adb359bdbaf4d944aa6955ff328d073d, type: 3}
   avatarReadyImage: {fileID: 2800000, guid: 526bc5c9c9a6585449099d4eac702ada, type: 3}
+  ReadyTextImage: {fileID: 2800000, guid: 5080cc8c7eaa4294a96dcb3c87c7a026, type: 3}
+  CancelTextImage: {fileID: 2800000, guid: f32a52cb54ef47d4aa53c7a227357e14, type: 3}
   tempX: 0
   tempY: 40
   tempWidth: 120

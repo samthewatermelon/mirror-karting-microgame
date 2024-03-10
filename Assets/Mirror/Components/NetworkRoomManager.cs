@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
+
+
 namespace Mirror
 {
     /// <summary>
@@ -696,10 +698,9 @@ namespace Mirror
             style.fontSize = 30;
             style.fontStyle = FontStyle.Bold;
             style.normal.textColor = Color.white;
+            style.alignment = TextAnchor.MiddleCenter;
 
             if (IsSceneActive(RoomScene))
-                //GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
-                //GUI.Box(new Rect(40f, 40f, Screen.width - 80f, Screen.height - 80f), "ROOM PLAYERS");
                 GUI.TextArea(new Rect(Screen.width / 2 - 60, 40, 120, 30), "PLAYERS", style);
         }
         #endregion
