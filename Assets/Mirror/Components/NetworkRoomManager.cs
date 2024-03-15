@@ -646,7 +646,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnRoomClientDisconnect() 
         {
-            transform.Find("UI").Find("message").gameObject.SetActive(true);
+            //transform.Find("UI").Find("message").gameObject.SetActive(true);
             transform.Find("UI").Find("PlayerName").gameObject.SetActive(true);
             transform.Find("UI").Find("Go").gameObject.SetActive(true);
             transform.Find("UI").Find("StopHostButton").gameObject.SetActive(false);
