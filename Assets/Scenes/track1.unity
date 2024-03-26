@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17121898, g: 0.0695472, b: 0.15266114, a: 1}
+  m_IndirectSpecularColor: {r: 0.17122526, g: 0.0695448, b: 0.15268382, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19888,8 +19888,42 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2300973952
       objectReference: {fileID: 0}
+    - target: {fileID: 7756607196714545802, guid: 9a6fa43fa7ab8f440ac54d2573aedd25,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a6fa43fa7ab8f440ac54d2573aedd25, type: 3}
+--- !u!1 &7756607196627090558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7756607196714545804, guid: 9a6fa43fa7ab8f440ac54d2573aedd25,
+    type: 3}
+  m_PrefabInstance: {fileID: 7756607196627090557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7756607196627090559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756607196627090558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c200a0fb6c0fbc44936e72a1dea85df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  localPlayerName: 
+  youLose: {fileID: 0}
+  totalLaps: 1
+  totalRaces: 2
+  raceOutcome: {fileID: 0}
+  positionHolder: 1
+  numberOfPlayers: 0
+  racesComplete: 0
 --- !u!1 &8392833574841851191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5246954690733570452, guid: def45f0cefc0fc1428af7e0b34f45bd5,
